@@ -12,3 +12,4 @@ C:\Users\BENJAMIN\source\repos\LibraryManagementSystem\LibraryManagementSystem\o
 C:\Users\BENJAMIN\source\repos\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\net8.0\LibraryManagementSystem.pdb
 C:\Users\BENJAMIN\source\repos\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\net8.0\LibraryManagementSystem.genruntimeconfig.cache
 C:\Users\BENJAMIN\source\repos\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\net8.0\ref\LibraryManagementSystem.dll
+C:\Users\BENJAMIN\source\repos\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\net8.0\LibraryManagementSystem.sourcelink.json

@@ -54,7 +54,7 @@ namespace LibraryManagementSystem
         {
             if (books.Any())
             {
-                Console.WriteLine("All books: ");
+                Console.WriteLine("\nAll books: ");
                 foreach (var book in books)
                 {
                     Console.WriteLine(book);

@@ -16,6 +16,7 @@ namespace LibraryManagementSystem
 
             while (true)
             {
+                Console.WriteLine();
                 Console.WriteLine("Library Management System"); // A welcome menu-interface
                 Console.WriteLine("1. Add Book");
                 Console.WriteLine("2. Borrow Book");
@@ -79,7 +80,7 @@ namespace LibraryManagementSystem
         {
             try
             {
-                Console.Write("\nSearch the \r\n Title: \n Author: \n Book ID: \r Initials of Title or Author: ");
+                Console.Write("\nSearch the book's Title, Author, Book ID, or initials of Title or Author to borrow ");
                 string query = Console.ReadLine(); // User enters Title or Author or ID or Initials of title/author
 
                 Book book = library.SearchBook(query);
@@ -108,8 +109,15 @@ namespace LibraryManagementSystem
 
                 if (book != null)
                 {
-                    library.ReturnBook(book, user, library);
-                    Console.WriteLine("Book returned successfully!");
+                    if (!book.IsBorrowed)
+                    {
+                        Console.WriteLine("Book not borrowed or already returned.");
+                    }
+                    else
+                    {
+                        library.ReturnBook(book, user, library);
+                        Console.WriteLine("Book returned successfully!");
+                    }
                 }
                 else
                 {
@@ -124,7 +132,7 @@ namespace LibraryManagementSystem
             try
             {
                 var availableBooks = library.GetAvailableBooks();
-                Console.WriteLine("Available Books: ");
+                Console.WriteLine("\nAvailable Books: ");
                 foreach (var book in availableBooks)
                 {
                     Console.WriteLine($"{book.Title} by {book.Author} \n ID: {book.BookId}");

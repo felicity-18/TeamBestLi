@@ -1,0 +1,1 @@
+A console application based Library Management System developed as an assignment from Tecvinson Academy, allowing user to add, borrow, return and view available books with features including book search, and fine management, built using C# language.

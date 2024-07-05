@@ -9,68 +9,52 @@ namespace LibraryManagementSystem
     public class Library
     {
         private List<Book> books;
-        private int nextBookId;
-
-        public Library()
-        {
+        public Library() 
+        { 
             books = new List<Book>();
-            nextBookId = 1;
         }
 
         public void AddBook(Book book)
         {
-            book = new Book(book.Title, book.Author, book.ISBN, nextBookId++);
             books.Add(book);
-            Console.WriteLine($"Book added: {book}");
         }
 
-        public void BorrowBook(int bookId, User user)
+        public Book SearchBook(string query)
         {
-            var book = books.FirstOrDefault(b => b.BookId == bookId);
-            if (book != null)
+            return books.FirstOrDefault(b => b.Title.Contains(query, StringComparison.OrdinalIgnoreCase) || b.Author.Contains(query, StringComparison.OrdinalIgnoreCase) || b.BookId.ToString().Equals(query) || b.Title.StartsWith(query, StringComparison.OrdinalIgnoreCase) || b.Author.StartsWith(query, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public bool BorrowBook(Book book, User user)
+        {
+            if (book == null || book.IsBorrowed)
             {
-                if (!book.IsBorrowed)
-                {
-                    book.IsBorrowed = true;
-                    Console.WriteLine($"Book borrowed: {book} by {user.Name}");
-                }
-                else
-                {
-                    Console.WriteLine($"Book already borrowed: {book}");
-                }
+                return false;
             }
-            else
+
+            book.IsBorrowed = true;
+            user.BorrowBook(book);
+            return true;
+        }
+
+        public void ReturnBook(Book book,User user, Library library)
+        {
+            if (book != null && book.IsBorrowed)
             {
-                Console.WriteLine("Book not found in the library.");
+                book.IsBorrowed = false;
+                user.ReturnBook(book);
             }
         }
 
-        public void ReturnBook(int bookId, User user)
+        public List<Book> GetAvailableBooks()
         {
-            var book = books.FirstOrDefault(b => b.BookId == bookId);
-            if (book != null)
-            {
-                if (book.IsBorrowed)
-                {
-                    book.IsBorrowed = false;
-                    Console.WriteLine($"Book returned: {book} by {user.Name}");
-                }
-                else
-                {
-                    Console.WriteLine("This book is not currently borrowed.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Book not found in the library.");
-            }
+            return books.Where(b => !b.IsBorrowed).ToList();
         }
 
         public void ViewAllBooks()
         {
             if (books.Any())
             {
-                Console.WriteLine("All books: ");
+                Console.WriteLine("\nAll books: ");
                 foreach (var book in books)
                 {
                     Console.WriteLine(book);

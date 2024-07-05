@@ -11,20 +11,26 @@ namespace LibraryManagementSystem
     public class User
     {
         public string Name { get; private set; }
-
+        private List<Book> borrowedBooks;
         public User(string name)
         {
             Name = name;
+            borrowedBooks = new List<Book>();
         }
 
-        public void BorrowBook(Library library, int bookId)
+        public void BorrowBook(Book book)
         {
-            library.BorrowBook(bookId, this);
+            borrowedBooks.Add(book);
         }
 
-        public void ReturnBook(Library library, int bookId)
+        public void ReturnBook(Book book)
         {
-            library.ReturnBook(bookId, this);
+            borrowedBooks.Remove(book);
+        }
+
+        public List<Book> GetBorrowedBooks()
+        {
+            return borrowedBooks;
         }
     }
 }
